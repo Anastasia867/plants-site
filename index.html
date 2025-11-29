@@ -4,20 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Світ Рослин</title>
+
+    <!-- jQuery та jQuery UI -->
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
     <style>
-      @font-face {
-        font-family: "MyLocalFont";
-        src: url("fonts/Roboto-Regular.woff") format("woff");
-        font-weight: normal;
-        font-style: normal;
-      }
-
-      p {
-        font-family: "MyLocalFont", sans-serif;
-        font-size: 18px;
-        line-height: 1.6;
-      }
-
       body {
         font-family: "Segoe UI", sans-serif;
         margin: 0;
@@ -32,29 +28,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        position: relative;
         color: white;
         text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
       }
-      .logo {
-        position: absolute;
-        left: 20px;
-        top: 20px;
-      }
-      .logo img {
-        height: 80px;
-        width: auto;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      }
       header h1 {
         font-size: 3em;
-        margin: 0;
       }
-      h1 {
-        font-family: "Playfair Display", serif;
-      }
-
       section {
         padding: 50px 20px;
         max-width: 1000px;
@@ -64,6 +43,44 @@
         text-align: center;
         color: #2e7d32;
       }
+
+      /* Акордеон */
+      #plant-accordion h3 {
+        background: #7fb77e;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      #plant-accordion div {
+        padding: 10px;
+        background: #f1f8f1;
+        border-left: 3px solid #7fb77e;
+      }
+
+      /* Tabs */
+      #plant-tabs .ui-tabs-nav {
+        background: #b0ddaa;
+        border-radius: 5px;
+      }
+      #plant-tabs .ui-tabs-nav li a {
+        color: #2f4f2f;
+        font-weight: bold;
+      }
+
+      /* Діалог */
+      #feedback-btn {
+        padding: 12px 25px;
+        background: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 6px;
+        font-size: 16px;
+      }
+      #feedback-btn:hover {
+        background: #3e8e41;
+      }
+
       .gallery {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -98,81 +115,14 @@
         color: white;
         padding: 20px;
       }
-      .svg-demo h2 {
-        text-align: center;
-        color: #2e5d3b;
-        margin-top: 40px;
-      }
-      .svg-container {
-        text-align: center;
-        margin-top: 20px;
-      }
-      .leaf-icon {
-        transition: transform 0.3s ease, filter 0.3s ease, stroke 0.3s ease;
-        cursor: pointer;
-      }
-      .leaf-icon:hover {
-        transform: scale(1.2);
-        stroke: #66bb6a;
-        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
-      }
-
-      .demo-box {
-        background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
-        padding: 20px 25px;
-        border-radius: 15px;
-        color: #1b4d2b;
-        font-size: 18px;
-        text-align: center;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        max-width: 700px;
-        margin: 20px auto;
-      }
-
-      .demo-box:hover {
-        transform: translateY(-5px) scale(1.03);
-        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
-      }
-      h2 {
-        font-family: "Playfair Display", serif !important;
-        font-weight: 600;
-      }
-      .subtitle {
-        font-family: "Roboto", sans-serif;
-        font-size: 18px;
-        text-align: center;
-        color: #3b593f;
-        margin-top: -10px;
-        margin-bottom: 30px;
-      }
-
-      .html5-demo {
-        margin-top: 20px !important;
-        margin-bottom: 5px !important;
-      }
-
-      .svg-demo {
-        margin-top: 10px !important;
-      }
     </style>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Roboto:wght@300;400&display=swap"
-      rel="stylesheet"
-    />
   </head>
 
   <body>
     <header>
-      <div class="logo">
-        <img src="img/log.png" alt="Логотип Світ Рослин" />
-      </div>
       <h1>Світ Рослин</h1>
     </header>
+
     <section>
       <h2>Про нас</h2>
       <p style="text-align: center; max-width: 700px; margin: auto">
@@ -181,6 +131,31 @@
         і створюйте власний зелений куточок вдома!
       </p>
     </section>
+
+    <!-- 🌿 Акордеон після блоку "Про нас" -->
+    <section>
+      <h2>Догляд за рослинами</h2>
+
+      <div id="plant-accordion">
+        <h3>Освітлення</h3>
+        <div>
+          <p>
+            Більшість кімнатних рослин потребують яскравого розсіяного світла.
+          </p>
+        </div>
+
+        <h3>Полив</h3>
+        <div>
+          <p>Поливайте тоді, коли верхній шар ґрунту висохне на 2–3 см.</p>
+        </div>
+
+        <h3>Температура</h3>
+        <div>
+          <p>Оптимальна температура для більшості рослин: 18–25°C.</p>
+        </div>
+      </div>
+    </section>
+
     <section>
       <h2>Наші улюбленці</h2>
       <div class="gallery">
@@ -194,6 +169,7 @@
             Тропічна рослина з великими різьбленими листками. Легка у догляді.
           </p>
         </div>
+
         <div class="card">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmXVugQOfs3WOHcvkxJj3KQW-lmpeLwdnqEA&s"
@@ -204,6 +180,7 @@
             Ідеальний вибір для зайнятих людей — не потребує частого поливу.
           </p>
         </div>
+
         <div class="card">
           <img
             src="https://lorashen.ua/static/media/uploads/product/Rasteniya/.thumbnails/img_8973.jpg/img_8973-360x360.jpg"
@@ -213,253 +190,74 @@
           <p>Вишукані квіти, які символізують красу і гармонію.</p>
         </div>
       </div>
-      <div style="max-width: 600px; margin: 0 auto; text-align: center">
-        <h2 style="color: #2e5d3b; font-family: Arial; margin-bottom: 10px">
-          10 найкращих рослин для дому
-        </h2>
-        <p style="font-size: 16px; color: #3a3a3a; line-height: 1.5">
-          У відео зібрані 10 ідеальних рослин для дому — невибагливих, корисних
-          та красивих. Дізнайтеся, як вони можуть освіжити ваш простір і зробити
-          атмосферу затишнішою.
-        </p>
-        <div style="width: 560px; margin: 20px auto 0">
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/HT4KCOu9Qv8?si=yM1OEqomBB7aY58J"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
-        </div>
-      </div>
-      <h2
-        style="
-          color: #2e5d3b;
-          font-family: Arial;
-          margin-bottom: 10px;
-          text-align: center;
-        "
-      >
-        Догляд за кімнатними рослинами
-      </h2>
-      <div style="width: 560px; margin: 0 auto">
-        <iframe
-          src="https://player.vimeo.com/video/811949778?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-          width="560"
-          height="315"
-          frameborder="0"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-          title="Кімнатні рослини Vimeo"
-        ></iframe>
-      </div>
-      <script src="https://player.vimeo.com/api/player.js"></script>
-      <h3 style="color: #2e5d3b">Атмосферна музика</h3>
-      <audio controls>
-        <source src="audio/music_fixed.mp3" type="audio/mpeg" />
-      </audio>
-      <h2
-        style="
-          text-align: center;
-          color: #2e5d3b;
-          margin-top: 40px;
-          margin-bottom: 20px;
-        "
-      >
-        Інформаційні віджети: погода та час
-      </h2>
-      <div
-        style="
-          background: #eaf4ea;
-          border-radius: 20px;
-          padding: 30px 20px;
-          margin: 0 auto 50px;
-          max-width: 900px;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        "
-      >
-        <div
-          style="
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 40px;
-            flex-wrap: wrap;
-          "
-        >
-          <div>
-            <div
-              id="ww_890c66263b735"
-              v="1.3"
-              loc="id"
-              a='{"t":"horizontal","lang":"uk","sl_lpl":1,"ids":["wl1163"],"font":"Arial","sl_ics":"one_a","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722"}'
-            >
-              <a
-                href="https://weatherwidget.org/"
-                id="ww_890c66263b735_u"
-                target="_blank"
-                >weatherwidget.org</a
-              >
-            </div>
-            <script
-              async
-              src="https://app3.weatherwidget.org/js/?id=ww_890c66263b735"
-            ></script>
-          </div>
-          <div style="text-align: center; width: 250px">
-            <canvas id="myClock" width="250" height="250"></canvas>
-            <p
-              id="ua-date2"
-              style="
-                margin-top: 10px;
-                font-size: 18px;
-                font-weight: bold;
-                color: #2e5d3b;
-              "
-            ></p>
-          </div>
-        </div>
-      </div>
-      <script>
-        function drawClock() {
-          const canvas = document.getElementById("myClock");
-          const ctx = canvas.getContext("2d");
-          const radius = canvas.height / 2;
-          ctx.translate(radius, radius);
-          setInterval(() => {
-            drawFace(ctx, radius);
-            drawNumbers(ctx, radius);
-            drawTime(ctx, radius);
-          }, 1000);
-        }
-        function drawFace(ctx, radius) {
-          ctx.beginPath();
-          ctx.arc(0, 0, radius * 0.95, 0, 2 * Math.PI);
-          ctx.fillStyle = "#ffffff";
-          ctx.fill();
-          ctx.strokeStyle = "#2e5d3b";
-          ctx.lineWidth = 8;
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.arc(0, 0, radius * 0.05, 0, 2 * Math.PI);
-          ctx.fillStyle = "#2e5d3b";
-          ctx.fill();
-        }
-        function drawNumbers(ctx, radius) {
-          ctx.font = radius * 0.25 + "px Arial";
-          ctx.textBaseline = "middle";
-          ctx.textAlign = "center";
-          for (let num = 1; num <= 12; num++) {
-            let ang = (num * Math.PI) / 6;
-            ctx.rotate(ang);
-            ctx.translate(0, -radius * 0.75);
-            ctx.rotate(-ang);
-            ctx.fillStyle = "#2e5d3b";
-            ctx.fillText(num, 0, 0);
-            ctx.rotate(ang);
-            ctx.translate(0, radius * 0.75);
-            ctx.rotate(-ang);
-          }
-        }
-        function drawTime(ctx, radius) {
-          let now = new Date();
-          let hour = now.getHours();
-          let minute = now.getMinutes();
-          let second = now.getSeconds();
-          hour = hour % 12;
-          hour =
-            (hour * Math.PI) / 6 +
-            (minute * Math.PI) / (6 * 60) +
-            (second * Math.PI) / (360 * 60);
-          drawHand(ctx, hour, radius * 0.5, 6);
-          minute = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60);
-          drawHand(ctx, minute, radius * 0.75, 4);
-          second = (second * Math.PI) / 30;
-          drawHand(ctx, second, radius * 0.85, 2, "#ff0000");
-        }
-        function drawHand(ctx, pos, length, width, color = "#2e5d3b") {
-          ctx.beginPath();
-          ctx.lineWidth = width;
-          ctx.lineCap = "round";
-          ctx.strokeStyle = color;
-          ctx.moveTo(0, 0);
-          ctx.rotate(pos);
-          ctx.lineTo(0, -length);
-          ctx.stroke();
-          ctx.rotate(-pos);
-        }
-        drawClock();
-        const monthsUA = [
-          "січня",
-          "лютого",
-          "березня",
-          "квітня",
-          "травня",
-          "червня",
-          "липня",
-          "серпня",
-          "вересня",
-          "жовтня",
-          "листопада",
-          "грудня",
-        ];
-        const d2 = new Date();
-        document.getElementById("ua-date2").innerText =
-          d2.getDate() + " " + monthsUA[d2.getMonth()] + " " + d2.getFullYear();
-      </script>
-      <h2>Ботанічний сад ім. Богдана Хмельницького (Черкаси)</h2>
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7339.625280172975!2d32.054636928659605!3d49.428770570426124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d14b8df82879a7%3A0xb3ee9eb789eeb070!2z0JHQvtGC0LDQvdGW0YfQvdC40Lkg0YHQsNC0INCn0LXRgNC60LDRgdGM0LrQvtCz0L4g0L3QsNGG0ZbQvtC90LDQu9GM0L3QvtCz0L4g0YPQvdGW0LLQtdGA0YHQuNGC0LXRgtGD!5e0!3m2!1suk!2sua!4v1763635263599!5m2!1suk!2sua"
-        width="100%"
-        height="450"
-        style="border: 0; border-radius: 20px; overflow: hidden"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      >
-      </iframe>
     </section>
-    <section class="html5-demo">
-      <h2>Демонстрація можливостей HTML5 та CSS3</h2>
-      <p class="subtitle">
-        Сучасні ефекти, анімації та естетичні можливості веб-дизайну
-      </p>
 
-      <div class="demo-box">
-        Це приклад блоку з ефектами CSS3: тінню, градієнтом, округленими кутами
-        та анімацією при наведенні.
+    <!-- 🌿 Вкладки під блоком з Монстери -->
+    <section>
+      <h2>Більше про Монстеру</h2>
+
+      <div id="plant-tabs">
+        <ul>
+          <li><a href="#t1">Опис</a></li>
+          <li><a href="#t2">Догляд</a></li>
+          <li><a href="#t3">Полив</a></li>
+        </ul>
+
+        <div id="t1">
+          <p>
+            Монстера — тропічна рослина з характерними прорізами на листках.
+          </p>
+        </div>
+
+        <div id="t2">
+          <p>
+            Любить яскраве розсіяне світло та потребує регулярного
+            обприскування.
+          </p>
+        </div>
+
+        <div id="t3">
+          <p>Полив проводять після підсихання верхнього шару ґрунту.</p>
+        </div>
       </div>
     </section>
-    <section class="svg-demo">
-      <h2>SVG та ефекти наведення</h2>
-      <p class="subtitle">
-        Мінімалістичні іконки з плавною взаємодією при наведенні
+
+    <!-- 🌿 Кнопка + діалогове вікно -->
+    <section style="text-align: center">
+      <button id="feedback-btn">Зворотній зв’язок</button>
+    </section>
+
+    <div id="feedback-dialog" title="Напишіть нам" style="display: none">
+      <p>
+        Дякуємо, що завітали на наш сайт! Залиште свій коментар або побажання.
       </p>
-      <div class="svg-container">
-        <svg
-          class="leaf-icon"
-          width="90"
-          height="90"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#2e5d3b"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path
-            d="M12 2C12 2 4 4 4 12C4 17.52 8.48 22 14 22C19.52 22 22 17.52 22 12C22 4 12 2 12 2Z"
-          />
-        </svg>
-        <p>Приклад SVG-іконки з ефектами CSS3 при наведенні</p>
-      </div>
-    </section>
+      <textarea style="width: 100%; height: 100px"></textarea>
+    </div>
+
     <footer>
       <p>© 2025 Світ Рослин | Створено з любов’ю до природи 🌿</p>
     </footer>
+
+    <!-- JS для віджетів -->
+    <script>
+      $(function () {
+        $("#plant-accordion").accordion({
+          heightStyle: "content",
+          collapsible: true,
+        });
+
+        $("#plant-tabs").tabs();
+
+        $("#feedback-dialog").dialog({
+          autoOpen: false,
+          width: 400,
+          modal: true,
+        });
+
+        $("#feedback-btn").on("click", function () {
+          $("#feedback-dialog").dialog("open");
+        });
+      });
+    </script>
   </body>
 </html>
